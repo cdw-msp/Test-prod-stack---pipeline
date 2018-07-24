@@ -2,7 +2,7 @@
   "Parameters" : {
     "EnvironmentName" : "dev",
     "AvailabilityZone1" : "us-west-2a",
-	"BMNIP" : 64.73.0.0.0/16
+	"BMNIP" : "64.73.0.0.0/16",
     "KeyName" : "petclinic-cicd",    
     "InstanceWebAmi" : "ami-a9d09ed1"
   }
