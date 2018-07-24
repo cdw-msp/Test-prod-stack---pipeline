@@ -138,7 +138,7 @@ Resources:
   VpcStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/vpc.cfn.copy.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/vpc.yml
       Parameters:
         AvailabilityZone1: !Ref AvailabilityZone1
         SSHFrom: !Ref SSHFrom
@@ -147,7 +147,7 @@ Resources:
   EC2Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/3-elb-ec2-upddated-copy-cft.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/ec2.yml
       Parameters:
         NetworkStackName: !GetAtt VpcStack.Outputs.Name
         EC2KeyPairName: !Ref KeyName
