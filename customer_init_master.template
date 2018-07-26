@@ -138,7 +138,7 @@ Resources:
   VpcStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_vpc.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_vpc.template
       Parameters:
         AvailabilityZone1: !Ref AvailabilityZone1
         SSHFrom: !Ref SSHFrom
@@ -147,7 +147,7 @@ Resources:
   EC2Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_avatar.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_avatar.template
       Parameters:
         NetworkStackName: !GetAtt VpcStack.Outputs.Name
         EC2KeyPairName: !Ref KeyName
@@ -157,7 +157,7 @@ Resources:
   EC2Stack2:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_bastion.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_bastion.template
       Parameters:
         NetworkStackName: !GetAtt VpcStack.Outputs.Name
         EC2KeyPairName: !Ref KeyName
