@@ -2,7 +2,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 
-Description: Master Teamplate that creates VPC and ec2 instance (Avatar)
+Description: Master Teamplate that creates VPC and ec2 instance
 
 
 Parameters:
@@ -58,7 +58,7 @@ Parameters:
   InstanceWebAmi:
     Description: "AMI ID for web servers"
     Type: "String"
-    Default: "ami-a9d09ed1"
+    Default: "ami-e0ba5c83"
     AllowedPattern: "^ami-[0-9a-fA-F]{8,8}"
     
   
@@ -138,7 +138,7 @@ Resources:
   VpcStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/vpc.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_vpc.yml
       Parameters:
         AvailabilityZone1: !Ref AvailabilityZone1
         SSHFrom: !Ref SSHFrom
@@ -147,12 +147,22 @@ Resources:
   EC2Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/ec2.yml
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_avatar.yml
       Parameters:
         NetworkStackName: !GetAtt VpcStack.Outputs.Name
         EC2KeyPairName: !Ref KeyName
         InstanceWebAmi: !Ref InstanceWebAmi
-        InstanceWebType: !Ref InstanceType     
+        InstanceWebType: !Ref InstanceType
+
+  EC2Stack2:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.amazonaws.com/${TemplateBucket}/customer_init_bastion.yml
+      Parameters:
+        NetworkStackName: !GetAtt VpcStack.Outputs.Name
+        EC2KeyPairName: !Ref KeyName
+        InstanceWebAmi: !Ref InstanceWebAmi
+        InstanceWebType: !Ref InstanceType        
 
 Outputs:
   Name:
