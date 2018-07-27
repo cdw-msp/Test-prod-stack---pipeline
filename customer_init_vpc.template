@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Description: VPC with public and privatesubnet
 
-# This VPC stack should be created first before any other
+#  VPC stack should be created first before any other
 # CloudFormation stacks, such as a bastion stack, database
 # stack and application stack
 Parameters:
